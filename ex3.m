@@ -1,3 +1,7 @@
+////////////////////
+/* Exercise 3(i)  */
+////////////////////
+
 max_pow := function(n: k:=2)
     i := -1;
     while k^(i+1) le n do
@@ -22,6 +26,10 @@ sequence := function(n: k:=2)
     end while;
     return Reverse(seq_);
 end function;
+
+/////////////////////
+/* Exercise 3(ii)  */
+/////////////////////
 
 modx := function(a, m, n)
     mod_value := 1;
