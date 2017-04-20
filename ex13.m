@@ -56,11 +56,13 @@ end function;
 ////////////////////////////////
 /*    Exercise 13(ii)         */
 ////////////////////////////////
-m := [128, 256, 512, 1024];
-for i in m do
-    print(MyNextPrime(2^i, 10));
-    print("\n");
-end for;
+compute_next_primes := procedure()
+    m := [128, 256, 512, 1024];
+    for i in m do
+        print(MyNextPrime(2^i, 10));
+        print("\n");
+    end for;
+end procedure;
 
 /*    Results    
 340282366920938463463374607431768211507
@@ -83,11 +85,30 @@ generate_fermat := function(n)
     return 2^(2^n) + 1;
 end function;
 
-for n in [1..20] do
-    is_prime := MyIsPrime(generate_fermat(n), 10);
-    if is_prime eq 1 then
-        print "F", n, "is prime";
-    else
-        print "F", n, "is not prime";
-    end if;
-end for;
+check_fermat_prime := procedure()
+    for n in [1..20] do
+        is_prime := MyIsPrime(generate_fermat(n), 10);
+        if is_prime eq 1 then
+            print "F", n, "is prime";
+        else
+            print "F", n, "is not prime";
+        end if;
+    end for;
+end procedure;
+
+////////////////////////////////
+/*    Exercise 13(iv)         */
+////////////////////////////////
+check_timing := function(n)
+    t := [];
+//    for n in [1000..2000] do
+    rand := Random([(10^n)..(10^(n+1))]);
+    p := NextPrime(rand);
+    t_0 := Cputime();
+    _ := MyIsPrime(p, 10);
+    t_1 := Cputime();
+    print t_1 - t_0;
+    t[#t + 1] := (t_1 - t_0);
+//    end for;
+    return t;
+end function;
