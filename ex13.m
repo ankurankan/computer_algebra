@@ -116,7 +116,8 @@ F 14 is not prime
 F 15 is not prime
 F 16 is not prime
 
-The code didn't throw any errors for F(17) but didn't produce any results in around a couple of hours.
+The code got stuck for F(17) and didn't produce any results in around 2 hours. It didn't throw any
+errors though.
  */
 
 ////////////////////////////////
@@ -127,3 +128,10 @@ check_timing := procedure(n)
     p := NextPrime(rand);
     time MyIsPrime(p, 10);
 end procedure;
+
+/* Results
+   I computed the run time of the algorithm for different values of no. of digits and then tried to fit 
+   curves of different degrees on it. I found the cubic curve to be the best fit, therefore my estimate 
+   for the complexity is: O(n^3) where n is the number of digits. Please refer to the attached image 
+   file for the plots.
+ */
