@@ -37,19 +37,11 @@ end procedure;
 ////////////////////////////////
 /*    Exercise 14(iii)         */
 ////////////////////////////////
-check_c := procedure()
-    c_values := [0, 1, 2, -2];
-    q := NextPrime(Random([(10^6)..((10^7)-1)]));
-    p := NextPrime(Random([(10^7)..((10^8)-1)]));
-    for c in c_values do
-        t_0 := Cputime();
-        factor := pollard(p*q, 10^7, c);
-        t_1 := Cputime();
-        print t_1 - t_0;
-    end for;
-end procedure;
 
 /* Results
+p := NextPrime(Random([(10^7)..((10^8)-1)]));
+q := NextPrime(Random([(10^6)..((10^7)-1)]));
+
 > time pollard(p*q, 10^7, 0);
 29249393
 Time: 5.670
@@ -70,10 +62,10 @@ c = -2 seems to take the most time in finding the factor.
 /*    Exercise 14(iv)        */
 ////////////////////////////////
 new_pollard := function(n, k, c)
-    x := [Random([2..(n-1)])];
+    x := [Random([(2)..(n-1)])];
     for i := 1 to k do
         x[#x+1] := f(x[#x], c) mod n;
-        gcd := GCD(n, (x[#x] - x[#x mod 2]));
+        gcd := GCD(n, (x[#x] - x[#x div 2]));
         if gcd ne 1 then
             return gcd;
         end if;
@@ -81,9 +73,37 @@ new_pollard := function(n, k, c)
     return 1;
 end function;
 
+/* Results
+   > p := NextPrime(Random([(10^7)..((10^8)-1)])); 
+   > q := NextPrime(Random([(10^6)..((10^7)-1)]));
 
+   > time new_pollard(p*q, 10^7, 0);
+   44293871
+   Time: 0.080
+   > time new_pollard(p*q, 10^7, 1);
+   44293871
+   Time: 0.060
+   > time new_pollard(p*q, 10^7, 2);
+   9417689
+   Time: 0.030
+   > time new_pollard(p*q, 10^7, -2);
+   44293871
+   Time: 0.020
+
+   The new pollard method is much faster than the original one.
+ */
 ////////////////////////////////
 /*    Exercise 14(v)        */
 ////////////////////////////////
+
+apply_new_pollard := procedure()
+    q := NextPrime(Random([(10^25)..((10^26)-1)]));
+    for i := 1 to 25 do
+        rand := Random([(10^i)..((10^(i+1))-1)]);
+        p := NextPrime(rand);
+        factor := new_pollard(p*q, 10^((25+i) div 2), 2);
+        print(factor);
+    end for;
+end procedure;
 
 
