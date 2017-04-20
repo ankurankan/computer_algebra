@@ -33,7 +33,20 @@ apply_pollard := procedure()
     end for;
 end procedure;
 
+/* Results
+ In around 2 hours, I was able to compute values till only 9 digits.
 
+ > apply_pollard();                          
+ 59
+ 233
+ 1409
+ 57853
+ 456037
+ 7796917
+ 93183199
+ 996513139
+
+*/
 ////////////////////////////////
 /*    Exercise 14(iii)         */
 ////////////////////////////////
@@ -106,4 +119,25 @@ apply_new_pollard := procedure()
     end for;
 end procedure;
 
+/* Results
+ With the new pollard algorithm, I was able to compute the factors for q (25 digits) and p (16 digits) 
+ in 2 hours.
 
+ > apply_new_pollard();
+ 67
+ 239
+ 3467
+ 92831
+ 414241
+ 6312547
+ 88622351
+ 685914857
+ 5481333457
+ 11563545397
+ 204177342983
+ 4455437849617
+ 49581808939249
+ 513625656658159
+ 6704810272445309
+
+ */
