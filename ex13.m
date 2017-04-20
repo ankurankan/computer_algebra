@@ -1,3 +1,8 @@
+////////////////////////////////
+/*    Exercise 13(i)          */
+////////////////////////////////
+
+/* Function to compute k and m for N-1 = 2^k * m */
 find_k_m := function(N)
     k := 0;
     m := N;
@@ -40,10 +45,49 @@ MyIsPrime := function(N, n)
     return 1;
 end function;
 
-MyNextPrime := function(N)
-    while MyIsPrime(N) eq 0 do
+/* Function to compute the next prime number */
+MyNextPrime := function(N, n)
+    while MyIsPrime(N, n) eq 0 do
         N +:= 1;
     end while;
-    print(N);
+    return N;
 end function;
 
+////////////////////////////////
+/*    Exercise 13(ii)         */
+////////////////////////////////
+m := [128, 256, 512, 1024];
+for i in m do
+    print(MyNextPrime(2^i, 10));
+    print("\n");
+end for;
+
+/*    Results    
+340282366920938463463374607431768211507
+
+115792089237316195423570985008687907853269984665640564039457584007913129640233
+
+1340780792994259709957402499820584612747936582059239337772356144372176403007354\
+6976801874298166903427690031858186486050853753882811946569946433649006084171
+
+1797693134862315907729305190789024733617976978942306572734300811577326758055009\
+6313270847732240753602112011387987139335765878976881441662249284743063947412437\
+7767893424865485276302219601246094119453082952085005768838150682342462881473913\
+110540827237163350510684586298239947245938479716304835356329624224137859
+*/
+
+////////////////////////////////
+/*    Exercise 13(iii)        */
+////////////////////////////////
+generate_fermat := function(n)
+    return 2^(2^n) + 1;
+end function;
+
+for n in [1..20] do
+    is_prime := MyIsPrime(generate_fermat(n), 10);
+    if is_prime eq 1 then
+        print "F", n, "is prime";
+    else
+        print "F", n, "is not prime";
+    end if;
+end for;
