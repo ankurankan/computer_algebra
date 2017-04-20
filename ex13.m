@@ -45,6 +45,10 @@ MyIsPrime := function(N, n)
     return 1;
 end function;
 
+////////////////////////////////
+/*    Exercise 13(ii)         */
+////////////////////////////////
+
 /* Function to compute the next prime number */
 MyNextPrime := function(N, n)
     while MyIsPrime(N, n) eq 0 do
@@ -53,9 +57,7 @@ MyNextPrime := function(N, n)
     return N;
 end function;
 
-////////////////////////////////
-/*    Exercise 13(ii)         */
-////////////////////////////////
+// Computing Primes
 compute_next_primes := procedure()
     m := [128, 256, 512, 1024];
     for i in m do
@@ -96,19 +98,32 @@ check_fermat_prime := procedure()
     end for;
 end procedure;
 
+/* Results
+F 1 is prime
+F 2 is prime
+F 3 is prime
+F 4 is prime
+F 5 is not prime
+F 6 is not prime
+F 7 is not prime
+F 8 is not prime
+F 9 is not prime
+F 10 is not prime
+F 11 is not prime
+F 12 is not prime
+F 13 is not prime
+F 14 is not prime
+F 15 is not prime
+F 16 is not prime
+
+The code didn't throw any errors for F(17) but didn't produce any results in around a couple of hours.
+ */
+
 ////////////////////////////////
 /*    Exercise 13(iv)         */
 ////////////////////////////////
-check_timing := function(n)
-    t := [];
-//    for n in [1000..2000] do
+check_timing := procedure(n)
     rand := Random([(10^n)..(10^(n+1))]);
     p := NextPrime(rand);
-    t_0 := Cputime();
-    _ := MyIsPrime(p, 10);
-    t_1 := Cputime();
-    print t_1 - t_0;
-    t[#t + 1] := (t_1 - t_0);
-//    end for;
-    return t;
-end function;
+    time MyIsPrime(p, 10);
+end procedure;
